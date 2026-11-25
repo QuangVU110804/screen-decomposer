@@ -1,0 +1,10 @@
+{
+  "source": "temp/text-quality/interview.png",
+  "element": "text_003",
+  "sourceSize": [1920, 1080],
+  "provenance": "Hand checked on original RGB crop with a coordinate grid, before reading new mask values. Target: observed strokes of the first word trong; not full pixel ground truth.",
+  "strokePoints": [[171,362],[188,365],[208,364],[231,364],[244,364],[266,364],[280,364],[300,365],[294,387]],
+  "negativePoints": [[220,363],[235,371],[200,387]],
+  "minimumStrokeAlpha": 80,
+  "maximumNegativeAlpha": 40
+}

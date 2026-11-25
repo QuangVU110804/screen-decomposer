@@ -1,0 +1,24 @@
+:root {
+  color-scheme:dark;
+  --bg:#101114;
+  --surface-sidebar:#141519;
+  --surface:#191b20;
+  --surface-inset:#15171c;
+  --surface-raised:#21242b;
+  --surface-hover:#292c35;
+  --line:#30333c;
+  --control-line:#666575;
+  --text:#eeeef2;
+  --muted:#a1a5b2;
+  --accent:#b6a1ff;
+  --accent-fill:#c6b5ff;
+  --accent-hover:#d6caff;
+  --accent-soft:#b6a1ff20;
+  --accent-ink:#231541;
+  --region-active:#ffe0a6;
+  --danger:#ffaaa6;
+  --warning:#e9c784;
+  --success:#91d7b0;
+  --radius:14px;
+  --font:Inter,"Segoe UI",system-ui,sans-serif
+}

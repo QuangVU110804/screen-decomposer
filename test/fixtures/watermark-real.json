@@ -1,0 +1,16 @@
+[
+  {"id":"tt-a","platform":"TikTok","split":"tune","file":"temp/watermark-real/tt-a.png","boxes":[[17,879,244,165]]},
+  {"id":"dy-a","platform":"Douyin","split":"tune","file":"temp/watermark-real/dy-a.png","boxes":[[12,19,145,94]]},
+  {"id":"yt-a1","platform":"YouTube","split":"tune","file":"temp/watermark-real/yt-a1.png","boxes":[[51,30,68,29]]},
+  {"id":"yt-a2","platform":"YouTube","split":"tune","file":"temp/watermark-real/yt-a2.png","boxes":[[419,30,68,29]]},
+  {"id":"ge-a","platform":"Gemini","split":"tune","file":"temp/watermark-real/ge-a.png","boxes":[[929,454,29,30]]},
+  {"id":"interview","platform":"Đối chứng nền","split":"tune","file":"temp/text-quality/interview.png","boxes":[]},
+  {"id":"meeting","platform":"Đối chứng nền","split":"tune","file":"temp/text-quality/meeting.png","boxes":[]},
+  {"id":"tt-b1","platform":"TikTok","split":"holdout","file":"temp/watermark-real/tt-b1.png","boxes":[[4,184,64,69]]},
+  {"id":"tt-b2","platform":"TikTok","split":"holdout","file":"temp/watermark-real/tt-b2.png","boxes":[[153,300,92,72]]},
+  {"id":"dy-b","platform":"Douyin","split":"regression","file":"temp/watermark-real/dy-b.png","boxes":[[8,7,108,42]]},
+  {"id":"dy-b-clean","platform":"Douyin","split":"regression","file":"temp/watermark-real/dy-b-clean.png","boxes":[]},
+  {"id":"ge-b1","platform":"Gemini","split":"holdout","file":"temp/watermark-real/ge-b1.png","boxes":[[2592,1376,96,96]]},
+  {"id":"ge-b2","platform":"Gemini","split":"holdout","file":"temp/watermark-real/ge-b2.png","boxes":[[184,116,28,29]]},
+  {"id":"anime","platform":"Đối chứng nền","split":"holdout","file":"temp/quality-reference/anime-reference.png","boxes":[]}
+]

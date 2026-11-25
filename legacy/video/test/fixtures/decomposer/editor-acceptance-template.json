@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "template-not-reviewed",
+  "reviewerId": "editor_001",
+  "reviewedAt": null,
+  "jobId": null,
+  "manifest": "temp/assets/<jobId>/manifest.json",
+  "assets": [],
+  "reviews": [
+    {
+      "assetId": "asset_001",
+      "reviewerId": "editor_001",
+      "type": "character",
+      "extractionMode": "SEGMENTED",
+      "useful": null,
+      "downloaded": null,
+      "timeSavedMinutes": null,
+      "artifactRating": null,
+      "comment": "",
+      "createdAt": null
+    }
+  ]
+}

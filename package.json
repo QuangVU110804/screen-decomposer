@@ -1,0 +1,28 @@
+{
+  "name": "anime-element-studio",
+  "version": "1.0.0",
+  "description": "Automatically extract reusable image regions locally on CPU without API keys",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/image/*.test.js",
+    "test:serial": "node --disable-warning=ExperimentalWarning --test --test-concurrency=1 test/image/*.test.js",
+    "start:legacy": "node scripts/start-legacy.js",
+    "test:legacy": "node legacy/video/scripts/run-tests.js",
+    "setup:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup-local.ps1",
+    "doctor": "node scripts/doctor.js",
+    "benchmark:images": "node scripts/benchmark-images.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^2.3.0",
+    "sharp": "^0.35.4"
+  }
+}

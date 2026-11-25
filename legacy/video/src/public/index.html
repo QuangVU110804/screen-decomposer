@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Phân rã video theo scene và trích xuất visual element có thể tái sử dụng">
+    <title>Video Scene Decomposer</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">EDITOR ASSET TOOLKIT</p>
+        <h1>Video Scene Decomposer</h1>
+        <p class="hero-copy">
+          Tách video thành scene, nhận diện các element hữu ích và xuất asset với provenance rõ ràng.
+        </p>
+      </header>
+
+      <section class="workspace" aria-label="Tạo job trích xuất">
+        <div class="tabs" role="tablist" aria-label="Nguồn video">
+          <button class="tab active" id="tab-url" type="button" role="tab" aria-selected="true" aria-controls="panel-url" data-tab="url">
+            YouTube URL
+          </button>
+          <button class="tab" id="tab-upload" type="button" role="tab" aria-selected="false" aria-controls="panel-upload" data-tab="upload">
+            Upload file
+          </button>
+        </div>
+
+        <section id="panel-url" class="panel" role="tabpanel" aria-labelledby="tab-url">
+          <form id="urlForm" novalidate>
+            <label class="field-label" for="urlInput">Đường dẫn YouTube hoặc video ID</label>
+            <div class="input-row">
+              <input id="urlInput" name="url" type="text" autocomplete="url" placeholder="https://youtube.com/watch?v=... hoặc video ID" spellcheck="false">
+              <button id="submitUrl" class="btn primary" type="submit">Bắt đầu</button>
+            </div>
+            <p class="field-hint">Video phải ở chế độ có thể truy cập bởi máy chủ.</p>
+          </form>
+        </section>
+
+        <section id="panel-upload" class="panel hidden" role="tabpanel" aria-labelledby="tab-upload" aria-hidden="true">
+          <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-controls="fileInput">
+            <span class="dropzone-icon" aria-hidden="true">⇧</span>
+            <strong>Kéo thả file video vào đây</strong>
+            <span>hoặc <label for="fileInput" class="link">chọn file từ máy</label></span>
+            <input id="fileInput" type="file" accept="video/*" hidden>
+          </div>
+          <p class="hint" id="uploadHint">Đang tải giới hạn upload…</p>
+          <p class="selected-file" id="selectedFile" aria-live="polite"></p>
+        </section>
+
+        <section id="authSection" class="auth-section hidden">
+          <label class="field-label" for="apiKeyInput">Server yêu cầu API key</label>
+          <div class="input-row">
+            <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Nhập API key (gửi qua X-API-Key)" spellcheck="false">
+            <button id="saveApiKeyBtn" class="btn secondary" type="button">Lưu key</button>
+          </div>
+          <p class="field-hint">Key được lưu trong trình duyệt của bạn, không gửi đi đâu khác ngoài server này.</p>
+        </section>
+
+        <section id="progressSection" class="status-section hidden" aria-live="polite">
+          <div class="section-heading">
+            <span class="section-kicker">PROCESSING</span>
+            <span id="progressPercent" class="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar" role="progressbar" aria-label="Tiến độ xử lý" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <p id="statusText" class="status-text">Đang chuẩn bị…</p>
+        </section>
+
+        <section id="resultSection" class="result-section hidden" aria-live="polite">
+          <div class="result-header">
+            <div>
+              <span class="section-kicker">DECOMPOSER RESULT</span>
+              <h2 id="assetCount">0 reusable asset</h2>
+              <p id="resultSummary" class="field-hint"></p>
+            </div>
+            <a id="downloadAllBtn" class="btn secondary" href="#">Tải video asset pack</a>
+          </div>
+
+          <div id="assetFilters" class="asset-filters" aria-label="Lọc asset">
+            <label>
+              <span>Phạm vi</span>
+              <select id="sceneScopeFilter">
+                <option value="selected">Scene đang chọn</option>
+                <option value="all">Toàn video</option>
+              </select>
+            </label>
+            <label>
+              <span>Loại</span>
+              <select id="typeFilter">
+                <option value="">Tất cả</option>
+                <option value="person">Person</option>
+                <option value="character">Character</option>
+                <option value="background">Background</option>
+                <option value="image">Image</option>
+                <option value="screenshot">Screenshot</option>
+                <option value="text">Text</option>
+                <option value="graphic">Graphic</option>
+              </select>
+            </label>
+            <label>
+              <span>Mode</span>
+              <select id="modeFilter">
+                <option value="">Tất cả</option>
+                <option value="DIRECT">DIRECT</option>
+                <option value="SEGMENTED">SEGMENTED</option>
+                <option value="RECONSTRUCTED">RECONSTRUCTED</option>
+              </select>
+            </label>
+            <label>
+              <span>Chất lượng tối thiểu</span>
+              <select id="qualityFilter">
+                <option value="0">Tất cả</option>
+                <option value="0.48">Review trở lên</option>
+                <option value="0.68">Usable</option>
+              </select>
+            </label>
+          </div>
+
+          <section id="sceneWorkspace" class="scene-workspace" aria-label="Scene timeline và chi tiết">
+            <div class="scene-list-panel">
+              <div class="section-heading">
+                <span class="section-kicker">SCENE TIMELINE</span>
+                <span id="sceneCount" class="progress-percent">0 scene</span>
+              </div>
+              <div id="sceneTimeline" class="scene-timeline" role="listbox" aria-label="Danh sách scene"></div>
+            </div>
+
+            <div id="sceneDetail" class="scene-detail hidden">
+              <div class="scene-detail-header">
+                <div>
+                  <span id="selectedSceneLabel" class="section-kicker">SCENE</span>
+                  <h3 id="sceneRange"></h3>
+                </div>
+                <a id="sceneDownloadBtn" class="btn-small" href="#">Tải scene pack</a>
+              </div>
+              <img id="scenePreview" class="scene-preview" alt="Scene preview">
+              <div id="keyframeStrip" class="keyframe-strip" aria-label="Keyframes"></div>
+              <div id="elementLegend" class="element-legend"></div>
+            </div>
+          </section>
+
+          <div class="section-heading asset-heading">
+            <span class="section-kicker">REUSABLE ELEMENTS</span>
+            <span id="visibleAssetCount" class="progress-percent"></span>
+          </div>
+          <div id="assetGrid" class="asset-grid"></div>
+          <p class="reuse-notice">
+            Việc trích xuất kỹ thuật không đồng nghĩa bạn có quyền tái sử dụng nội dung.
+            Asset RECONSTRUCTED có pixel được suy luận hoặc tạo mới và luôn được gắn nhãn rõ ràng.
+          </p>
+        </section>
+
+        <section id="sceneClipSection" class="clip-section hidden" aria-label="Video scenes">
+          <div class="section-heading">
+            <span class="section-kicker">SCENES</span>
+            <span id="sceneClipCount" class="progress-percent"></span>
+          </div>
+          <div id="sceneClipGrid" class="clip-grid"></div>
+        </section>
+
+        <section id="errorSection" class="error-section hidden" aria-live="assertive">
+          <span class="error-icon" aria-hidden="true">!</span>
+          <div>
+            <span class="section-kicker">ERROR</span>
+            <p id="errorText" class="error"></p>
+          </div>
+          <button id="retryBtn" class="btn secondary" type="button">Thử lại</button>
+        </section>
+
+        <section id="historySection" class="history-section hidden" aria-label="Lịch sử job">
+          <div class="section-heading">
+            <span class="section-kicker">LỊCH SỬ</span>
+            <button id="toggleHistoryBtn" class="btn-small" type="button">Thu gọn</button>
+          </div>
+          <div id="historyList" class="history-list" role="list"></div>
+        </section>
+      </section>
+
+      <p class="footer-note">Asset pack và source chỉ được giữ tạm thời theo cấu hình máy chủ.</p>
+    </main>
+    <noscript>Ứng dụng cần JavaScript để gửi video và theo dõi tiến độ.</noscript>
+  </body>
+</html>

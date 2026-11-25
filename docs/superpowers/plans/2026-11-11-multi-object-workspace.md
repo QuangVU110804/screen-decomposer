@@ -1,0 +1,5 @@
+# Multi-object extraction and review
+
+1. Establish a MobileSAM baseline on existing multi-object scenes. In `test/python/test_regions.py`, cover a contour grazed by a grid point and a grouped proposal with independently supported objects. In `workers/regions.py` and `workers/engine.py`, keep supplemental prompts bounded, retain individual masks when they explain a grouped mask, and apply the export limit after consolidation. The worker fingerprint already includes the changed Python source.
+2. Update the scan workspace in `src/web/index.html`, `styles.css`, `app.js` and the gallery/preview modules. Make the scan preset explicit, link focus in the result list to the source preview, scope bulk selection to the filter, and keep the ZIP count global. Reuse the selection endpoint and the existing layer editor.
+3. Compare source-coordinate masks before and after, run both test suites, and exercise upload, selection, review and export on desktop and narrow viewports. All processing uses the existing CPU models and local routes.

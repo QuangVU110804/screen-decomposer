@@ -1,0 +1,14 @@
+node_modules/
+temp/
+data/
+.env
+.venv/
+models/*.pt
+models/*.onnx
+models/rapidocr/
+__pycache__/
+test-results/
+.superpowers/
+.claude/settings.local.json
+models/*.download
+.claude/

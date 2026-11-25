@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Xóa watermark và logo trên ảnh ngay trên máy, không cần API key.">
+  <title>Xóa watermark / logo · Element Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles/watermark.css">
+  <script type="module" src="/modules/watermark.js"></script>
+</head>
+<body>
+  <main class="wm-main">
+    <nav class="wm-nav" aria-label="Điều hướng"><a class="button secondary" href="/">← Tách vật thể</a></nav>
+    <header class="workspace-heading"><div><p class="eyebrow">DỌN ẢNH NGAY TRÊN MÁY</p><h1>Xóa watermark / logo</h1><p class="muted">Khoanh vùng dấu TikTok, Douyin, YouTube, Gemini hoặc logo khác trên ảnh.</p></div></header>
+    <div id="wmError" class="notice error" role="alert" hidden></div>
+    <div class="wm-grid">
+      <section class="panel wm-preview" aria-labelledby="wmPreviewTitle">
+        <div class="panel-heading"><h2 id="wmPreviewTitle">Ảnh xem trước</h2><span id="wmDimensions" class="small muted"></span></div>
+        <div id="wmEmpty" class="wm-empty"><h3>Thêm ảnh có watermark</h3><p class="muted">Chọn ảnh để dò watermark. Kiểm tra các vùng gợi ý trước khi xóa.</p><button id="wmChoose" class="button secondary" type="button">Chọn ảnh từ máy</button><p class="small muted">JPG, PNG, WebP tĩnh · 20 MB / 24 MP</p></div>
+        <div id="wmStage" class="wm-viewer checker" hidden><div class="wm-image"><img id="wmImage" alt="Ảnh gốc để khoanh vùng watermark" draggable="false"><svg id="wmOverlay" aria-label="Kéo để khoanh vùng xóa; có thể nhập tọa độ bằng bàn phím ở bảng bên cạnh"></svg></div></div>
+        <div class="wm-compare" role="group" aria-label="So sánh ảnh"><button id="wmOriginal" class="button secondary" type="button" aria-pressed="true" disabled>Ảnh gốc</button><button id="wmResult" class="button secondary" type="button" aria-pressed="false" disabled>Sau khi xóa</button><button id="wmReplace" class="text-button" type="button" hidden>Đổi ảnh</button></div>
+        <p id="wmName" class="wm-caption small muted">Ảnh được xử lý local; không gửi lên dịch vụ AI.</p>
+        <input id="wmFile" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+      </section>
+      <aside class="panel wm-controls" aria-label="Vùng xóa và xử lý">
+        <div class="panel-heading"><h2>Vùng cần xóa <span id="wmCount" class="count-pill">0</span></h2><button id="wmClear" class="text-button" type="button" disabled>Bỏ tất cả</button></div>
+        <div class="wm-control-body">
+          <p class="small muted">Ảnh mới được dò tự động. Chọn Sửa hoặc Bỏ ở mỗi khung gợi ý. Kéo trên ảnh gốc để khoanh thêm logo và chữ đi kèm.</p>
+          <button id="wmDetect" class="button secondary" type="button" disabled>Dò watermark</button>
+          <ol id="wmRegions" class="wm-regions" aria-label="Các vùng đã chọn"></ol>
+          <p id="wmRegionEmpty" class="small muted">Chưa chọn vùng nào.</p>
+          <details id="wmCoordinates"><summary>Nhập hoặc chỉnh tọa độ pixel</summary>
+            <form id="wmCoordinateForm">
+              <div class="wm-coordinate-grid"><label for="wmX">X<input id="wmX" type="number" min="0" step="1" value="0" required disabled></label><label for="wmY">Y<input id="wmY" type="number" min="0" step="1" value="0" required disabled></label><label for="wmWidth">Rộng<input id="wmWidth" type="number" min="1" step="1" value="60" required disabled></label><label for="wmHeight">Cao<input id="wmHeight" type="number" min="1" step="1" value="30" required disabled></label></div>
+              <button id="wmAdd" class="button secondary" type="submit" disabled>Thêm vùng</button>
+              <button id="wmCancelEdit" class="text-button" type="button" hidden>Hủy sửa</button>
+            </form>
+          </details>
+          <p id="wmArea" class="small muted">Tối đa 20 khung · tổng diện tích ≤20% ảnh / 1 triệu pixel.</p>
+          <button id="wmRemove" class="button primary" type="button" disabled>Xóa watermark / logo</button>
+          <button id="wmCancel" class="button secondary" type="button" hidden>Hủy xử lý</button>
+          <p id="wmStatus" class="small muted" role="status" aria-live="polite">Sẵn sàng · Không cần API key hay model bổ sung.</p>
+          <a id="wmDownload" class="button primary" download="cleaned.png" hidden>Tải PNG đã xóa</a>
+        </div>
+        <p class="wm-limit small muted">Nền được ước lượng từ pixel xung quanh. Vùng lớn, tóc, chữ hoặc họa tiết phức tạp có thể còn vệt. Giữ ảnh gốc, kiểm tra kết quả trước khi dùng.</p>
+      </aside>
+    </div>
+    <footer class="wm-footer small muted">Chỉ chỉnh dấu nhìn thấy trong vùng bạn chọn · Xuất PNG đúng kích thước ảnh · Tệp tạm tự dọn sau xử lý</footer>
+  </main>
+  <noscript>Ứng dụng cần JavaScript để chọn vùng và xử lý ảnh local.</noscript>
+</body>
+</html>

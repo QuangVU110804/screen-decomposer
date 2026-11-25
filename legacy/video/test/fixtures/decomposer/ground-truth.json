@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0 synthetic fixtures generated specifically for this project",
+  "reviewStatus": "pending-human-editor-review",
+  "dataset": {
+    "generatedBy": "node scripts/make-decomposer-fixtures.js",
+    "outputDirectory": "temp/test-fixtures/decomposer",
+    "video": "temp/test-fixtures/decomposer/synthetic_decomposer_001.mp4"
+  },
+  "thresholds": {
+    "boundaryToleranceSec": 0.25,
+    "boundaryF1": 0.85,
+    "elementPrecision": 0.75,
+    "elementRecall": 0.75,
+    "bboxIou": 0.5,
+    "maskIou": 0.85,
+    "maskBoundaryF1": 0.85,
+    "duplicateKeptRate": 0.1,
+    "falseMergeRate": 0.03,
+    "minimumEditorRatings": 7,
+    "editorUsefulRate": 0.6,
+    "editorDownloadIntentRate": 0.5
+  },
+  "coverage": [
+    { "kind": "hard_cut", "positive": "synthetic://hard-cut", "hardNegative": "synthetic://composition-change" },
+    { "kind": "fade", "positive": "synthetic://fade", "hardNegative": "synthetic://brief-dim" },
+    { "kind": "dissolve", "positive": "synthetic://dissolve", "hardNegative": "synthetic://motion-blur" },
+    { "kind": "zoom_pan_scroll", "positive": "synthetic://ken-burns-scroll", "hardNegative": "synthetic://static-slide" },
+    { "type": "person", "positive": "synthetic://presenter", "hardNegative": "synthetic://person-inside-screenshot" },
+    { "type": "character", "positive": "synthetic://character-glow", "hardNegative": "synthetic://character-on-poster" },
+    { "type": "background", "positive": "synthetic://presenter-background", "hardNegative": "synthetic://flat-transition" },
+    { "type": "image", "positive": "synthetic://inserted-photo", "hardNegative": "synthetic://ordinary-footage" },
+    { "type": "screenshot", "positive": "synthetic://website-panel", "hardNegative": "synthetic://screen-recording-scroll" },
+    { "type": "text", "positive": "synthetic://lower-third", "hardNegative": "synthetic://text-inside-screenshot" },
+    { "type": "graphic", "positive": "synthetic://isolated-chart", "hardNegative": "synthetic://background-pattern" }
+  ],
+  "videos": [
+    {
+      "videoId": "synthetic_decomposer_001",
+      "duration": 12,
+      "scenes": [
+        {
+          "sceneId": "scene_001",
+          "start": 0,
+          "end": 4,
+          "elements": [
+            { "elementId": "gt_person", "identity": "presenter_a", "type": "person", "bbox": [0.08, 0.16, 0.28, 0.76] },
+            { "elementId": "gt_background", "identity": "studio_bg", "type": "background", "bbox": [0, 0, 1, 1] },
+            { "elementId": "gt_text", "identity": "lower_third_a", "type": "text", "bbox": [0.08, 0.78, 0.42, 0.12] },
+            { "elementId": "gt_logo_1", "identity": "shared_logo", "type": "logo", "bbox": [0.86, 0.05, 0.1, 0.1] }
+          ]
+        },
+        {
+          "sceneId": "scene_002",
+          "start": 4,
+          "end": 8,
+          "elements": [
+            { "elementId": "gt_screenshot", "identity": "website_a", "type": "screenshot", "bbox": [0.12, 0.1, 0.76, 0.78] },
+            { "elementId": "gt_graphic", "identity": "arrow_a", "type": "graphic", "bbox": [0.72, 0.62, 0.16, 0.2] }
+          ]
+        },
+        {
+          "sceneId": "scene_003",
+          "start": 8,
+          "end": 12,
+          "elements": [
+            { "elementId": "gt_character", "identity": "character_a", "type": "character", "bbox": [0.55, 0.12, 0.34, 0.82] },
+            { "elementId": "gt_image", "identity": "poster_a", "type": "image", "bbox": [0.08, 0.15, 0.38, 0.7] },
+            { "elementId": "gt_logo_3", "identity": "shared_logo", "type": "logo", "bbox": [0.86, 0.05, 0.1, 0.1] }
+          ]
+        }
+      ],
+      "assets": [
+        { "identity": "presenter_a" },
+        { "identity": "studio_bg" },
+        { "identity": "lower_third_a" },
+        { "identity": "website_a" },
+        { "identity": "arrow_a" },
+        { "identity": "character_a" },
+        { "identity": "poster_a" },
+        { "identity": "shared_logo" }
+      ]
+    }
+  ]
+}

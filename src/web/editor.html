@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sửa layer — Element Studio</title><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/styles/editor.css"><script type="module" src="/modules/layer-editor.js"></script></head>
+<body class="layer-editor">
+  <a class="skip-link" href="#canvasArea">Đến vùng chỉnh sửa</a>
+  <header class="layer-header"><div><a id="backToScan" class="text-button" href="/">← Về lượt quét</a><h1>Sửa layer <span class="local-badge">LOCAL</span></h1><p id="editorName" class="small muted">Đang mở ảnh…</p></div><div class="layer-actions"><button class="button secondary" id="importLayer">Nhập ảnh gốc B</button><button class="button primary" id="exportLayers">Tải ZIP layer</button><input type="file" id="originalFile" accept="image/png,image/jpeg,image/webp" hidden></div></header>
+  <div id="editorError" class="notice error" role="alert" hidden></div>
+  <p class="editor-hint">Chỉnh phần nhìn thấy bằng mask. Phần bị che chỉ có thể lấy đúng khi bổ sung ảnh gốc. PNG từng layer giữ kích thước gốc.</p>
+  <main class="layer-layout">
+    <aside class="layer-list-panel panel" aria-label="Danh sách layer"><div class="panel-heading"><h2>Layer <span id="layerCount" class="count-pill">0</span></h2><button id="allVisible" class="text-button">Hiện tất cả</button></div><p class="small muted list-hint">Trên cùng ở phía trước. Mắt chỉ thay đổi xem trước; ô tải chọn layer cho ZIP.</p><div id="layerList" class="layer-list"></div><button id="saveLayout" class="button secondary">Lưu vị trí và thứ tự</button></aside>
+    <section class="canvas-panel panel" aria-label="Xem và chỉnh layer">
+      <div class="canvas-toolbar"><label>Zoom <select id="zoom"><option value="fit">Vừa khung</option><option value="1">100%</option><option value="2">200%</option><option value="4">400%</option></select></label><label>Nền <select id="canvasBackground"><option value="checker">Caro</option><option value="light">Sáng</option><option value="dark">Tối</option></select></label><label class="toggle"><input type="checkbox" id="sourceUnderlay">Ảnh nguồn phía dưới</label></div>
+      <div id="canvasArea" class="canvas-area checker" tabindex="0" aria-label="Vùng vẽ mask. Chọn công cụ và chạm hoặc kéo trên layer; dùng đa giác theo tọa độ nếu thao tác bằng bàn phím."><canvas id="layerCanvas" aria-label="Các layer theo thứ tự đã chọn"></canvas></div>
+      <div class="canvas-foot"><span id="canvasInfo" class="small muted"></span><span id="editorStatus" class="small" role="status">Đang tải layer…</span></div>
+    </section>
+    <aside class="inspector panel" aria-label="Chỉnh mask layer đã chọn">
+      <div class="panel-heading"><h2 id="selectedName">Chọn layer</h2></div>
+      <div class="inspector-content">
+        <div class="selected-actions"><button class="button secondary" id="soloLayer" aria-pressed="false">Xem riêng</button><a class="button secondary" id="downloadLayer" download>Tải PNG đã lưu</a><a class="text-button" id="downloadOriginal" download hidden>Crop nguồn ban đầu</a></div>
+        <p id="layerMeta" class="small muted"></p><p id="layerWarning" class="small muted"></p>
+        <fieldset><legend>Vị trí trên ảnh</legend><div class="coordinate-fields"><label>X <input type="number" id="layerX" step="1"></label><label>Y <input type="number" id="layerY" step="1"></label></div><p class="small muted">Di chuyển không đổi kích thước hoặc nội suy pixel.</p></fieldset>
+        <fieldset><legend>Cắt thủ công</legend><label for="maskTool">Công cụ</label><select id="maskTool"><option value="view">Xem / di chuyển khung</option><option value="erase">Cọ xóa khỏi mask</option><option value="add">Cọ khôi phục pixel nguồn</option><option value="polygon-erase">Đa giác xóa</option><option value="polygon-add">Đa giác giữ lại</option></select><label for="brushRadius">Bán kính cọ <output id="radiusValue">12</output> px gốc</label><input id="brushRadius" type="range" min="1" max="256" value="12"><div class="mask-history"><button id="undoMask" class="button secondary" aria-label="Hoàn tác mask">Hoàn tác</button><button id="redoMask" class="button secondary" aria-label="Làm lại mask">Làm lại</button></div><p class="small muted">Cọ khôi phục lấy pixel từ crop nguồn, có thể lấy lại cả A nếu A đã che B. Dùng ảnh gốc B để có B đầy đủ.</p></fieldset>
+        <div id="polygonControls" hidden><label for="polygonPoints">Đa giác theo tọa độ crop: x,y; x,y; …</label><textarea id="polygonPoints" rows="3" placeholder="10,10; 80,10; 80,90"></textarea><div class="mask-history"><button id="applyPolygon" class="button secondary">Áp dụng đa giác</button><button id="clearPolygon" class="text-button">Bỏ điểm</button></div></div>
+        <div class="mask-save"><button id="saveMask" class="button primary">Lưu mask</button><button id="discardMask" class="text-button">Bỏ sửa chưa lưu</button><button id="resetMask" class="text-button">Về mask tự động ban đầu</button></div>
+        <p class="small muted">Ctrl/Cmd+Z hoàn tác, Shift+Z làm lại. Bản đầu được giữ để khôi phục; sửa layer này không làm mờ hay xóa layer khác.</p>
+      </div>
+    </aside>
+  </main>
+</body></html>

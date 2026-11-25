@@ -1,0 +1,9 @@
+{
+  "imageSize": [1200, 675],
+  "sunCore": [990, 247],
+  "rayCenters": [[957,133],[1027,150],[1099,174],[1104,240],[1093,303],[1054,353],[986,354],[922,336],[884,289],[881,232],[899,169]],
+  "transparentSunGaps": [[981,149],[1082,270],[879,207]],
+  "wholeCharacterPoints": [[243,157],[241,300],[221,397],[281,398],[217,563],[286,563]],
+  "characterGap": [252,490],
+  "note": "Manually selected visible landmarks on the user-provided1200x675 reference. This is a narrow regression, not general segmentation ground truth."
+}

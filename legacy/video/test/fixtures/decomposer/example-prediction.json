@@ -1,0 +1,57 @@
+{
+  "videos": [
+    {
+      "videoId": "synthetic_decomposer_001",
+      "duration": 12,
+      "scenes": [
+        {
+          "sceneId": "scene_001",
+          "start": 0,
+          "end": 4.08,
+          "elements": [
+            { "elementId": "element_001_01", "type": "person", "observations": [{ "bbox": [0.09, 0.16, 0.27, 0.75] }] },
+            { "elementId": "element_001_02", "type": "background", "observations": [{ "bbox": [0, 0, 1, 1] }] },
+            { "elementId": "element_001_03", "type": "text", "observations": [{ "bbox": [0.08, 0.79, 0.41, 0.11] }] },
+            { "elementId": "element_001_04", "trackId": "track_logo", "type": "logo", "observations": [{ "bbox": [0.86, 0.05, 0.1, 0.1] }] }
+          ]
+        },
+        {
+          "sceneId": "scene_002",
+          "start": 4.08,
+          "end": 8.02,
+          "elements": [
+            { "elementId": "element_002_01", "type": "screenshot", "observations": [{ "bbox": [0.12, 0.1, 0.76, 0.78] }] },
+            { "elementId": "element_002_02", "type": "graphic", "observations": [{ "bbox": [0.71, 0.61, 0.17, 0.21] }] }
+          ]
+        },
+        {
+          "sceneId": "scene_003",
+          "start": 8.02,
+          "end": 12,
+          "elements": [
+            { "elementId": "element_003_01", "type": "character", "observations": [{ "bbox": [0.55, 0.12, 0.34, 0.82] }] },
+            { "elementId": "element_003_02", "type": "image", "observations": [{ "bbox": [0.08, 0.15, 0.38, 0.7] }] },
+            { "elementId": "element_003_03", "trackId": "track_logo", "type": "logo", "observations": [{ "bbox": [0.86, 0.05, 0.1, 0.1] }] }
+          ]
+        }
+      ],
+      "assets": [
+        { "assetId": "asset_001", "identity": "presenter_a", "occurrences": [{ "identity": "presenter_a" }] },
+        { "assetId": "asset_002", "identity": "studio_bg", "occurrences": [{ "identity": "studio_bg" }] },
+        { "assetId": "asset_003", "identity": "lower_third_a", "occurrences": [{ "identity": "lower_third_a" }] },
+        { "assetId": "asset_004", "identity": "website_a", "occurrences": [{ "identity": "website_a" }] },
+        { "assetId": "asset_005", "identity": "arrow_a", "occurrences": [{ "identity": "arrow_a" }] },
+        { "assetId": "asset_006", "identity": "character_a", "occurrences": [{ "identity": "character_a" }] },
+        { "assetId": "asset_007", "identity": "poster_a", "occurrences": [{ "identity": "poster_a" }] },
+        {
+          "assetId": "asset_008",
+          "identity": "shared_logo",
+          "occurrences": [
+            { "identity": "shared_logo", "sceneId": "scene_001" },
+            { "identity": "shared_logo", "sceneId": "scene_003" }
+          ]
+        }
+      ]
+    }
+  ]
+}
